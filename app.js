@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override')
 const StudySpot = require('./models/studyspot');
+const studyspot = require('./models/studyspot');
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/study-spotter', {
     useNewUrlParser: true,
@@ -20,14 +23,48 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
+
 app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/makestudyspot', async (req, res) => {
-    const studySpot = new StudySpot({title: 'Library', description: "quiet space"});
+app.get('/spots', async (req, res) => {
+    const studySpots = await StudySpot.find({});
+    res.render('spots/index', { studySpots })
+})
+
+app.get('/spots/new', (req, res) => {
+    res.render('spots/new');
+});
+
+app.post('/spots', async (req, res) => {
+    const studySpot = new StudySpot(req.body.studySpot);
     await studySpot.save();
-    res.send(studySpot);
+    res.redirect(`/spots/${studySpot._id}`)
+});
+
+app.get('/spots/:id', async (req, res) => {
+    const studySpot = await StudySpot.findById(req.params.id);
+    res.render('spots/show', { studySpot });
+})
+
+app.get('/spots/:id/edit', async(req, res) => {
+    const studySpot = await StudySpot.findById(req.params.id);
+    res.render('spots/edit', { studySpot });
+})
+
+app.put('/spots/:id', async(req, res) => {
+    const { id } = req.params;
+    const studySpot = await StudySpot.findByIdAndUpdate(id, {...req.body.studySpot})
+    res.redirect(`/spots/${studySpot._id}`)
+})
+
+app.delete('/spots/:id', async (req, res) => {
+    const {id} = req.params;
+    await StudySpot.findByIdAndDelete(id);
+    res.redirect('/spots');
 })
 
 app.listen(3000, () => {
