@@ -22,7 +22,9 @@ const seedDB = async () => {
         const random1000 = Math.floor(Math.random() * 1000);
         const study = new StudySpot({
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
-            title: `${sample(descriptors)} ${sample(places)}`
+            title: `${sample(descriptors)} ${sample(places)}`,
+            image: 'https://source.unsplash.com/collection/298137',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda ipsa harum, est ratione eos consectetur deleniti a voluptates cumque perspiciatis. Cum dolore facere mollitia quos, quibusdam nemo cumque quo exercitationem.'
         })
         await study.save();
     }

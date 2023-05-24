@@ -1,6 +1,8 @@
 <% layout('layouts/boilerplate') %>
 <h1><%= studySpot.title %></h1>
 <h2><%= studySpot.location %></h2>
+<img src="<%= studySpot.image %>" alt="">
+<p><%= studySpot.description %></p>
 <p><form action="/spots/<%= studySpot._id %>?_method=DELETE" method="POST">
     <button>Delete</button>
 </form></p>
