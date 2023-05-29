@@ -1,34 +1,30 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="row">
+  <div class="row">
     <div class="col-6 offset-3">
-        <div class="card">
-            <img src="<%= studySpot.image %>" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"><%= studySpot.title %></h5>
-              <p class="card-text"><%= studySpot.description %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <div class="card-body">
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
+      <div class="card mb-5">
+        <img src="<%= studySpot.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= studySpot.title %>
+          </h5>
+          <p class="card-text">
+            <%= studySpot.description %>
+          </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted">
+            <%= studySpot.location %>
+          </li>
+        </ul>
+        <div class="card-body">
+          <a href="/spots/<%= studySpot._id %>/edit" class="btn btn-warning">Edit</a>
+          <form class="d-inline" action="/spots/<%= studySpot._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+          </p>
+          <a href="/spots" class="card-link">All spots</a>
+        </div>
+      </div>
     </div>
-</div>
-
-<h1></h1>
-<h2></h2>
-<img  alt="">
-<p><%= studySpot.description %></p>
-<p><form action="/spots/<%= studySpot._id %>?_method=DELETE" method="POST">
-    <button>Delete</button>
-</form></p>
-<footer>
-    <p><a href="/spots/<%= studySpot._id %>/edit">Edit</a></p>
-    <a href="/spots">All spots</a>
-</footer>
+  </div>
