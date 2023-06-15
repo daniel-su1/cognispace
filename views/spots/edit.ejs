@@ -2,22 +2,22 @@
 <div class="row">
     <h1 class="text-center">Edit Spot</h1>
     <div class="col-6 offset-3">
-        <form action="/spots/<%= studySpot._id %>?_method=PUT" method="POST">
+        <form action="/spots/<%= studySpot._id %>?_method=PUT" method="POST" novalidate class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="studySpot[title]" value="<%= studySpot.title %>">
+                <input class="form-control" type="text" id="title" name="studySpot[title]" value="<%= studySpot.title %>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="studySpot[location]" value="<%= studySpot.location %>">
+                <input class="form-control" type="text" id="location" name="studySpot[location]" value="<%= studySpot.location %>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="image">Image URL</label>
-                <input class="form-control" type="text" id="image" name="studySpot[image]" value="<%= studySpot.image %>">
+                <input class="form-control" type="text" id="image" name="studySpot[image]" value="<%= studySpot.image %>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="studySpot[description]"><%= studySpot.description %></textarea>
+                <textarea class="form-control" type="text" id="description" name="studySpot[description]" required><%= studySpot.description %></textarea>
             </div>
             <button type="submit" class="btn btn-info mt-3 mb-3">Update Spot</button>
         </form>
