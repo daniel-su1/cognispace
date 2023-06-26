@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const {campgroundSchema} = require('./schemas.js')
+const {studySpotSchema, reviewSchema} = require('./schemas.js')
 const catchAsync = require('./utils/CatchAsync')
 const ExpressError = require('./utils/ExpressError')
 const methodOverride = require('method-override')
 const StudySpot = require('./models/studyspot');
-
+const Review = require('./models/review');
+const review = require('./models/review');
 
 mongoose.connect('mongodb://127.0.0.1:27017/study-spotter', {
     useNewUrlParser: true,
@@ -41,6 +42,17 @@ const validateStudySpot = (req, res, next) => {
     }
 }
 
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400);
+    }
+    else {
+        next();
+    }
+}
+
 app.get('/', (req, res) => {
     res.render('home');
 })
@@ -62,7 +74,8 @@ app.post('/spots', validateStudySpot, catchAsync(async (req, res, next) => {
 }))
 
 app.get('/spots/:id', catchAsync(async (req, res) => {
-    const studySpot = await StudySpot.findById(req.params.id);
+    const studySpot = await StudySpot.findById(req.params.id).populate('reviews');
+    console.log(studySpot)
     res.render('spots/show', { studySpot });
 }))
 
@@ -81,6 +94,22 @@ app.delete('/spots/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await StudySpot.findByIdAndDelete(id);
     res.redirect('/spots');
+}))
+
+app.post('/spots/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const studySpot = await StudySpot.findById(req.params.id);
+    const review = new Review(req.body.review);
+    studySpot.reviews.push(review);
+    await review.save();
+    await studySpot.save();
+    res.redirect(`/spots/${studySpot._id}`);
+}))
+
+app.delete('/spots/:id/reviews/:reviewId', catchAsync(async (req, res) => {
+    const {id, reviewId } = req.params;
+    await StudySpot.findByIdAndUpdate(id, {$pull: {reviews: reviewId}})
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/spots/${id}`)
 }))
 
 app.all('*', (req, res, next) => {
