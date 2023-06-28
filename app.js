@@ -2,13 +2,12 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const {studySpotSchema, reviewSchema} = require('./schemas.js')
+const {spotSchema, reviewSchema} = require('./schemas.js')
 const catchAsync = require('./utils/CatchAsync')
 const ExpressError = require('./utils/ExpressError')
 const methodOverride = require('method-override')
-const StudySpot = require('./models/studyspot');
+const Spot = require('./models/spot');
 const Review = require('./models/review');
-const review = require('./models/review');
 
 mongoose.connect('mongodb://127.0.0.1:27017/study-spotter', {
     useNewUrlParser: true,
@@ -30,9 +29,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-const validateStudySpot = (req, res, next) => {
+const validateSpot = (req, res, next) => {
     
-    const { error } = studySpotSchema.validate(req.body);
+    const { error } = spotSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400);
@@ -58,56 +57,56 @@ app.get('/', (req, res) => {
 })
 
 app.get('/spots', async (req, res) => {
-    const studySpots = await StudySpot.find({});
-    res.render('spots/index', { studySpots })
+    const spots = await Spot.find({});
+    res.render('spots/index', { spots })
 })
 
 app.get('/spots/new', (req, res) => {
     res.render('spots/new');
 });
 
-app.post('/spots', validateStudySpot, catchAsync(async (req, res, next) => {
+app.post('/spots', validateSpot, catchAsync(async (req, res, next) => {
 
-    const studySpot = new StudySpot(req.body.studySpot);
-    await studySpot.save();
-    res.redirect(`/spots/${studySpot._id}`)
+    const spot = new Spot(req.body.spot);
+    await spot.save();
+    res.redirect(`/spots/${spot._id}`)
 }))
 
 app.get('/spots/:id', catchAsync(async (req, res) => {
-    const studySpot = await StudySpot.findById(req.params.id).populate('reviews');
-    console.log(studySpot)
-    res.render('spots/show', { studySpot });
+    const spot = await Spot.findById(req.params.id).populate('reviews');
+    console.log(spot)
+    res.render('spots/show', { spot });
 }))
 
 app.get('/spots/:id/edit', catchAsync(async (req, res) => {
-    const studySpot = await StudySpot.findById(req.params.id);
-    res.render('spots/edit', { studySpot });
+    const spot = await Spot.findById(req.params.id);
+    res.render('spots/edit', { spot });
 }))
 
-app.put('/spots/:id', validateStudySpot, catchAsync(async (req, res) => {
+app.put('/spots/:id', validateSpot, catchAsync(async (req, res) => {
     const { id } = req.params;
-    const studySpot = await StudySpot.findByIdAndUpdate(id, { ...req.body.studySpot })
-    res.redirect(`/spots/${studySpot._id}`)
+    const spot = await Spot.findByIdAndUpdate(id, { ...req.body.spot })
+    res.redirect(`/spots/${spot._id}`)
 }))
 
 app.delete('/spots/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
-    await StudySpot.findByIdAndDelete(id);
+    await Spot.findByIdAndDelete(id);
     res.redirect('/spots');
 }))
 
 app.post('/spots/:id/reviews', validateReview, catchAsync(async (req, res) => {
-    const studySpot = await StudySpot.findById(req.params.id);
+    const spot = await Spot.findById(req.params.id);
     const review = new Review(req.body.review);
-    studySpot.reviews.push(review);
+    spot.reviews.push(review);
     await review.save();
-    await studySpot.save();
-    res.redirect(`/spots/${studySpot._id}`);
+    await spot.save();
+    res.redirect(`/spots/${spot._id}`);
 }))
 
 app.delete('/spots/:id/reviews/:reviewId', catchAsync(async (req, res) => {
     const {id, reviewId } = req.params;
-    await StudySpot.findByIdAndUpdate(id, {$pull: {reviews: reviewId}})
+    await Spot.findByIdAndUpdate(id, {$pull: {reviews: reviewId}})
     await Review.findByIdAndDelete(reviewId);
     res.redirect(`/spots/${id}`)
 }))

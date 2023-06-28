@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Review = require('./review')
 const Schema = mongoose.Schema;
 
-const StudySpotSchema = new Schema({
+const SpotSchema = new Schema({
     title: String,
     image: String,
     description: String,
@@ -16,7 +16,7 @@ const StudySpotSchema = new Schema({
     ]
 });
 
-StudySpotSchema.post('findOneAndDelete', async function (doc) {
+SpotSchema.post('findOneAndDelete', async function (doc) {
     if(doc){
         await Review.deleteMany({
             _id: {
@@ -26,4 +26,4 @@ StudySpotSchema.post('findOneAndDelete', async function (doc) {
     }
 });
 
-module.exports = mongoose.model('studyspot', StudySpotSchema);
+module.exports = mongoose.model('spot', SpotSchema);

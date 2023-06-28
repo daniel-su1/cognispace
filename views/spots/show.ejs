@@ -3,23 +3,23 @@
   <div class="row">
     <div class="col-6">
       <div class="card mb-5">
-        <img src="<%= studySpot.image %>" class="card-img-top" alt="...">
+        <img src="<%= spot.image %>" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">
-            <%= studySpot.title %>
+            <%= spot.title %>
           </h5>
           <p class="card-text">
-            <%= studySpot.description %>
+            <%= spot.description %>
           </p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-muted">
-            <%= studySpot.location %>
+            <%= spot.location %>
           </li>
         </ul>
         <div class="card-body">
-          <a href="/spots/<%= studySpot._id %>/edit" class="btn btn-warning">Edit</a>
-          <form class="d-inline" action="/spots/<%= studySpot._id %>?_method=DELETE" method="POST">
+          <a href="/spots/<%= spot._id %>/edit" class="btn btn-warning">Edit</a>
+          <form class="d-inline" action="/spots/<%= spot._id %>?_method=DELETE" method="POST">
             <button class="btn btn-danger">Delete</button>
           </form>
         </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-6">
       <h2>Leave a Review</h2>
-      <form action="/spots/<%=studySpot._id%>/reviews" method="POST" class="form-control validated-form" novalidate>
+      <form action="/spots/<%=spot._id%>/reviews" method="POST" class="form-control validated-form" novalidate>
         <div class="mb-3">
           <label class="form-label" for="rating">Rating</label>
           <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
@@ -44,12 +44,12 @@
         </div>
         <button class="btn btn-success">Submit</button>
       </form>
-      <% for( let review of studySpot.reviews) { %>
+      <% for( let review of spot.reviews) { %>
         <div class="card mb-3">
           <div class="card-body ">
             <h5 class="card-title">Rating: <%= review.rating %></h5>
             <p class="card-body">Review: <%= review.body %>
-              <form action="/spots/<%= studySpot._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+              <form action="/spots/<%= spot._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                 <button class="btn btn-sm btn-danger">Delete</button>
               </form>
           </div>

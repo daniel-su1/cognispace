@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
-const studySpotSchema = Joi.object({
-    studySpot: Joi.object({
+const spotSchema = Joi.object({
+    spot: Joi.object({
         title: Joi.string().required(),
         image: Joi.string().required(),
         location: Joi.string().required(),
@@ -9,7 +9,7 @@ const studySpotSchema = Joi.object({
     }).required()
 });
 
-module.exports.studySpotSchema = studySpotSchema;
+module.exports.spotSchema = spotSchema;
 
 
 
