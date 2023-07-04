@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/CatchAsync')
 const {spotSchema} = require('../schemas.js')
-const isLoggedIn = require('../middleware.js');
+const {isLoggedIn} = require('../middleware.js');
 const ExpressError = require('../utils/ExpressError')
 const Spot = require('../models/spot');
 
