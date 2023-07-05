@@ -43,6 +43,18 @@ module.exports.isAuthor = async (req, res, next) => {
     next();
 }
 
+module.exports.defaultReviewTitle = (req, res, next) => {
+    if (!req.body.review.title) {
+        if (req.body.review.body.length > 20){
+            req.body.review.title = req.body.review.body.substring(0, 20) + '...';
+        }
+        else {
+            req.body.review.title = req.body.review.body;
+        }
+    }
+    next();
+}
+
 module.exports.validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
     if (error) {
