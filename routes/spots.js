@@ -2,21 +2,8 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/CatchAsync')
 const {spotSchema} = require('../schemas.js')
-const {isLoggedIn} = require('../middleware.js');
-const ExpressError = require('../utils/ExpressError')
+const {isLoggedIn, validateSpot, isAuthor} = require('../middleware.js');
 const Spot = require('../models/spot');
-
-const validateSpot = (req, res, next) => {
-    
-    const { error } = spotSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400);
-    }
-    else {
-        next();
-    }
-}
 
 router.get('/', async (req, res) => {
     const spots = await Spot.find({});
@@ -29,13 +16,20 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 router.post('/', isLoggedIn, validateSpot, catchAsync(async (req, res, next) => {
     const spot = new Spot(req.body.spot);
+    spot.author = req.user._id;
     await spot.save();
     req.flash('success', 'Successfully made a new spot!');
     res.redirect(`/spots/${spot._id}`)
 }))
 
 router.get('/:id', catchAsync(async (req, res) => {
-    const spot = await Spot.findById(req.params.id).populate('reviews');
+    const spot = await Spot.findById(req.params.id)
+    .populate({
+        path: 'reviews',
+        populate: {
+            path: 'author'
+        }
+    }).populate('author');
     if (!spot) {
         req.flash('error', 'Cannot find that spot!');
         return res.redirect('/spots');
@@ -44,14 +38,18 @@ router.get('/:id', catchAsync(async (req, res) => {
     res.render('spots/show', { spot });
 }))
 
-router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     const spot = await Spot.findById(req.params.id);
+    if(!spot){
+        req.flash('error', 'Cannot find that spot!');
+        return res.redirect('/spots');
+    }
     res.render('spots/edit', { spot });
 }))
 
-router.put('/:id', validateSpot, isLoggedIn, catchAsync(async (req, res) => {
+router.put('/:id', validateSpot, isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     const { id } = req.params;
-    const spot = await Spot.findByIdAndUpdate(id, { ...req.body.spot })
+    const spot = await Spot.findByIdAndUpdate(id, { ...req.body.spot });
     req.flash('success', 'Successfully updated spot!');
     res.redirect(`/spots/${spot._id}`)
 }))

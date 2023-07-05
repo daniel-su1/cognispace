@@ -21,6 +21,7 @@ const seedDB = async () => {
     for(let i = 0; i < 50; i++){
         const random1000 = Math.floor(Math.random() * 1000);
         const study = new Spot({
+            author: '64a3b8317c73cf8392fc0cd4',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             image: 'https://source.unsplash.com/collection/298137',

@@ -18,10 +18,10 @@ router.post('/register', catchAsync(async (req, res) => {
                 console.log(err);
                 return next(err);
             }
+            console.log(registeredUser);
+            req.flash('success', 'Welcome to Study Spotter!');
+            res.redirect('/spots');
         });
-        console.log(registeredUser);
-        req.flash('success', 'Welcome to Study Spotter!');
-        res.redirect('/spots');
     } catch (e) {
         req.flash('error', e.message);
         res.redirect('register');
