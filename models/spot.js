@@ -7,7 +7,12 @@ const SpotSchema = new Schema({
     image: String,
     description: String,
     location: String,
-    image: String,
+    images: [
+        {
+            url: String,
+            filename: String
+        }
+    ],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
