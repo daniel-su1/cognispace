@@ -75,3 +75,11 @@ module.exports.isReviewAuthor = async (req, res, next) => {
     }
     next();
 }
+
+module.exports.copyLocation = (req, res, next) => {
+    console.log("copyLocation");
+    console.log(req.body.spot);
+    req.body.spot.location = req.body['spot[location] address-search'];
+    delete req.body['spot[location] address-search'];
+    next();
+}
