@@ -55,7 +55,7 @@
             <%= spot.location %>
           </li>
         </ul>
-        <% if (currentUser && spot.author.equals(currentUser._id)) { %>
+        <% if (currentUser && spot.author && spot.author.equals(currentUser._id)) { %>
           <div class="card-body">
             <a href="/spots/<%= spot._id %>/edit" class="btn btn-warning">Edit</a>
             <form class="d-inline" action="/spots/<%= spot._id %>?_method=DELETE" method="POST">
@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="col-6">
-      <div id='map' style='width: auto; height: 350px;'></div>
+      <div id='map' style='width: auto; height: 350px;' class="mb-3"></div>
       <% if (currentUser) { %>
         <h2>Leave a Review</h2>
         <form action="/spots/<%=spot._id%>/reviews" method="POST" class="form-control validated-form" novalidate>

@@ -1,9 +1,9 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
     container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    style: 'mapbox://styles/mapbox/dark-v11', // style URL
     center: spot.geometry.coordinates, // starting position [lng, lat]
-    zoom: 12, // starting zoom
+    zoom: 14, // starting zoom
 });
 // Create a default Marker and add it to the map.
 const marker1 = new mapboxgl.Marker()
