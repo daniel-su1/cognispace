@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">StudySpotter</a>
+    <a class="navbar-brand" href="/">StudySpotter</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,12 +13,11 @@
       </div>
       <div class="navbar-nav ms-auto">
         <% if (!currentUser) { %>
-          <a class="nav-link" href="/login">Login</a>
-          <a class="nav-link" href="/register">Register</a>
+          <a class="nav-link" href="/sign-in">Sign In</a>
+          <a class="nav-link" href="/sign-up">Create an Account</a>
           <% } else { %>
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="/sign-out">Sign Out</a>
             <% } %>
-        <button type="button" id="btnSwitch">Toggle Dark Mode</button>
       </div>
     </div>
   </div>

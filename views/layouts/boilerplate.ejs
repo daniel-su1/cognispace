@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +14,49 @@
     </script>
     <script>
         const script = document.getElementById('search-js');
+        const darkTheme = {
+            variables: {
+                // fontFamily: "'Helvetica Neue', Arial, sans-serif",
+                // unit: '1rem',
+                // padding: '0.5rem',
+                // borderRadius: '0.25rem',
+                // boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.5)',
+
+                // // Sizing
+                // minWidth: '20rem',
+                // itemSpacing: '1rem', // Spacing between items
+                // itemPadding: '0.5rem', // Padding of items
+                // footerPadding: '0.5rem', // Padding for footer
+                // modalPadding: '1rem', // Padding for modals
+
+                // Colors
+                colorText: '#cacbcc', // Light color for text against dark backgrounds
+                colorAccentPrimary: '#007bff',
+                colorAccentSecondary: '#6c757d',
+                colorBackground: '#343a40', // Dark background for elements
+                colorBackgroundHover: '#495057', // Color for hover
+                colorBackgroundActive: '#262626', // Color for press
+                // // Borders and box shadows
+                // colorBorder: '#6c757d', // Border color
+                // borderRadius: '0.25rem',
+                // boxShadow: '0 0 0.5rem rgba(0, 0, 0, 0.5)',
+
+                // // Typography
+                // lineHeight: '1.5',
+                // fontFamily: "'Helvetica Neue', Arial, sans-serif",
+                // fontWeightBody: '400',
+                // fontWeightSubheading: '600',
+                // fontWeightHeading: '700',
+
+                // // Transitions
+                // durationTransition: '150ms', // Transition duration
+                // timingFunctionTransition: 'ease-out' // Transition timing function
+            },
+        };
+
         script.onload = function () {
             mapboxsearch.autofill({
+                theme: darkTheme,
                 accessToken: 'pk.eyJ1IjoiZGFuaWVsLXN1IiwiYSI6ImNsazA4ejN1NDBqZDUzaG1tdGUyZTFtZTUifQ.CZdr7-ogyOuaFkvWu1HkvA'
             });
         };
@@ -20,12 +64,10 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
-    
-    >
-
+    <link rel="stylesheet" href="/stylesheets/app.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 " data-bs-theme="dark">
     <%- include('../partials/navbar') %>
         <main class="container mt-5 mb-5">
             <%- include('../partials/flash') %>

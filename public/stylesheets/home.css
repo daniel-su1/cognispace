@@ -1,0 +1,64 @@
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://res.cloudinary.com/doi9yfsfy/image/upload/v1689627946/pt2ndaxmm8491_p8xqsv_c8n7vh.jpg
+    );
+    background-size: cover;
+    background-position: center;
+}
+
+@media (min-width: 1200px) {
+    .cover-container {
+        max-width: 70vw;
+    }
+}
+
+.nav-link{
+    color: rgba(255,255,255, 0.5);
+    font-weight: 500;
+    border-bottom: 0.25rem solid transparent;
+
+}
+
+
+.nav-link:hover{
+    color: rgba(255,255,255, 0.5);
+    border-bottom: 0.25rem solid rgba(255,255,255, 0.5)
+}
+
+main{
+    margin:auto
+}
+
+.nav-link:active{
+    color: white;
+    border-bottom: 0.25rem solid white;
+}
+
+.nav-link.active{
+    color: white;
+    border-bottom: 0.25rem solid white;
+}
+
+.btn-secondary{
+    background-color: rgba(255,255,255, 0);
+    color: #ffffff;
+    border-color: rgba(255,255,255, 0.5);
+    border-width: 0.1rem;
+}
+
+.btn-secondary:hover{
+    background-color: rgba(255,255,255);
+    color: #212529;
+    border-color: rgba(255,255,255, 0.5);
+}
+
+.btn-secondary.active{
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.5);
+}
+.btn-secondary:active{
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.5);
+}

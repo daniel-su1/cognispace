@@ -5,6 +5,8 @@ const map = new mapboxgl.Map({
     center: spot.geometry.coordinates, // starting position [lng, lat]
     zoom: 14, // starting zoom
 });
+
+map.addControl(new mapboxgl.NavigationControl());
 // Create a default Marker and add it to the map.
 const marker1 = new mapboxgl.Marker()
 .setLngLat(spot.geometry.coordinates)

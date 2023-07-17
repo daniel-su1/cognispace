@@ -7,6 +7,8 @@ const ImageSchema = new Schema({
     filename: String
 });
 
+const opts = { toJSON: { virtuals: true } };
+
 ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');
 });
@@ -37,6 +39,12 @@ const SpotSchema = new Schema({
             ref: 'Review'
         }
     ]
+}, opts);
+
+SpotSchema.virtual('properties.popUpMarkup').get(function () {
+    return `
+    <strong><a href="/spots/${this._id}">${this.title}</a></strong>
+    <p>${this.description.substring(0, 20)}...</p>`;
 });
 
 SpotSchema.post('findOneAndDelete', async function (doc) {

@@ -55,11 +55,17 @@ module.exports.renderEditForm = async (req, res) => {
 }
 
 module.exports.updateSpot = async (req, res) => {
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.spot.location,
+        limit: 1
+    }).send()
     const { id } = req.params;
     console.log(req.body)
+    
     const spot = await Spot.findByIdAndUpdate(id, { ...req.body.spot });
     const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
     spot.images.push(...imgs);
+    spot.geometry = geoData.body.features[0].geometry;
     await spot.save();
     if(req.body.deleteImages){
         for(let filename of req.body.deleteImages){

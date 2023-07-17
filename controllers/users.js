@@ -1,10 +1,10 @@
 const User = require('../models/user');
 
-module.exports.renderRegister = (req, res) => {
-    res.render('users/register');
+module.exports.renderSignUp = (req, res) => {
+    res.render('users/sign-up');
 }
 
-module.exports.register = async (req, res, next) => {
+module.exports.signUp = async (req, res, next) => {
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
@@ -20,22 +20,22 @@ module.exports.register = async (req, res, next) => {
         });
     } catch (e) {
         req.flash('error', e.message);
-        res.redirect('register');
+        res.redirect('sign-up');
     }
 }
 
-module.exports.renderLogin = (req, res) => {
-    res.render('users/login');
+module.exports.renderSignIn = (req, res) => {
+    res.render('users/sign-in');
 }
 
-module.exports.login = (req, res) => {
+module.exports.signIn = (req, res) => {
     req.flash('success', 'Welcome Back!');
     const redirectURL = res.locals.returnTo || '/spots';
     delete res.locals.returnTo;
     res.redirect(redirectURL);
 }
 
-module.exports.logout = (req, res) => {
+module.exports.signOut = (req, res) => {
     req.logout(function (err) {
         if (err) {
             console.log(err);
