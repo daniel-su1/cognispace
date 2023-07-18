@@ -54,7 +54,8 @@ const store = MongoDBStore.create({
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: 'thisshouldbeabettersecret!'
-    }
+    },
+    client: mongoose.connection.getClient(),
 })
 
 store.on("error", function(e) {
