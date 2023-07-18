@@ -20,7 +20,7 @@ const seedDB = async () => {
     await Spot.deleteMany({});
     for (let i = 0; i < 8; i++) {
         const study = new Spot({
-            author: "64a3b8317c73cf8392fc0cd4",
+            author: "64b6334954524515a1eb1a4b",
             location: spots[i].address,
             title: spots[i].name,
             images: [
