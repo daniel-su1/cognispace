@@ -22,9 +22,11 @@ const User = require('./models/user');
 const userRoutes = require('./routes/users');
 const spotRoutes = require('./routes/spots');
 const reviewRoutes = require('./routes/reviews');
+const dbUrl = process.env.DB_URL 
 
+const MongoDBStore = require("connect-mongo");
 
-mongoose.connect('mongodb://127.0.0.1:27017/study-spotter', {
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -46,7 +48,21 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
+
+const store = MongoDBStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+})
+
+store.on("error", function(e) {
+    console.log("SESSION STORE ERROR", e)
+})
+
 const sessionConfig = {
+    store: store,
     secret: 'thisshouldbeabettersecret!',
     resave: false,
     saveUninitialized: true,
