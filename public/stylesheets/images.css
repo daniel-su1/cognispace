@@ -4,3 +4,10 @@
     object-fit: cover;
     object-position: center center;
 }
+
+.img-fluid {
+    width: 700px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center center;
+}
