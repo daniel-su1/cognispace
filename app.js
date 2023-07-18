@@ -24,7 +24,7 @@ const spotRoutes = require('./routes/spots');
 const reviewRoutes = require('./routes/reviews');
 const dbUrl = process.env.DB_URL 
 
-const MongoDBStore = require("connect-mongo");
+const MongoStore = require("connect-mongo");
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -49,13 +49,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 
-const store = MongoDBStore.create({
-    mongoUrl: dbUrl,
+const store = MongoStore.create({
+    client: mongoose.connection.getClient(),
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: 'thisshouldbeabettersecret!'
     },
-    client: mongoose.connection.getClient(),
+
 })
 
 store.on("error", function(e) {
