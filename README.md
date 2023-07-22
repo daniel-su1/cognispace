@@ -9,7 +9,7 @@ StudySpotter is a comprehensive, full-stack web application designed to help Uni
 - **Image Upload:** Allows users to upload images of their study spots using Cloudinary API.
 - **Geocoding:** Convert address inputs to geographic coordinates using Mapbox Geocoding API.
 
-**You can visit the deployment of StudySpotter [here.]([https://link-url-here.org](https://studyspotter-2e57eb2137fb.herokuapp.com/))**
+**You can visit the deployment of StudySpotter [here.](https://studyspotter-2e57eb2137fb.herokuapp.com/)**
 
 ## Installation
 
