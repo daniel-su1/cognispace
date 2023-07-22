@@ -3,6 +3,11 @@
 ## Overview
 StudySpotter is a comprehensive, full-stack web application designed to help University of Waterloo students discover, share, and review their favourite study locations throughout the Waterloo region. This project is built using Node.js, Express.js, MongoDB for the backend and Bootstrap with EJS templating for the frontend.
 
+## Screenshots
+![App Screenshot](https://raw.githubusercontent.com/daniel-su1/study-spotter/main/screenshots/Screenshot%202023-07-22%20174037.jpg)
+![App Screenshot](https://raw.githubusercontent.com/daniel-su1/study-spotter/main/screenshots/Screenshot%202023-07-22%20174136.jpg)
+![App Screenshot](https://raw.githubusercontent.com/daniel-su1/study-spotter/main/screenshots/Screenshot%202023-07-22%20173959.jpg)
+
 ## Features
 - **CRUD Operations:** Students can create, read, update, and delete their preferred study spots.
 - **User Authentication:** Secure user registration and login system powered by Passport.js.
@@ -29,10 +34,6 @@ To set up the project locally, follow the steps below:
 ## Future Developments
 
 I plan to further improve StudySpotter by overhauling the frontend with a more responsive, visually pleasing UI using React.js. I am also considering converting it into a Single Page Application for improved user experience.
-
-## Contributing
-
-We welcome contributions! Please feel free to fork the repository and submit pull requests. If you find any bugs, do not hesitate to submit an issue in the Github repository.
 
 ## License
 
