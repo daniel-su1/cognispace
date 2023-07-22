@@ -13,6 +13,7 @@ StudySpotter is a comprehensive, full-stack web application designed to help Uni
 - **User Authentication:** Secure user registration and login system powered by Passport.js.
 - **Image Upload:** Allows users to upload images of their study spots using Cloudinary API.
 - **Geocoding:** Convert address inputs to geographic coordinates using Mapbox Geocoding API.
+- **Dynamic Mapping:** Integrated Mapbox Maps Service API to dynamically render maps for each study spot based on the geographic coordinates obtained through geocoding. This feature provides a visual guide, helping users locate study spots easily.
 
 **You can visit the deployment of StudySpotter [here.](https://studyspotter-2e57eb2137fb.herokuapp.com/)**
 
