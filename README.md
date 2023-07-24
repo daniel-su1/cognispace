@@ -30,7 +30,7 @@ To set up the project locally, follow the steps below:
 3. Create a .env file in the root directory and populate it with your MongoDB connection string, Cloudinary API credentials, and Mapbox Geocoding API key.
 
 4. Run the application:
-```npm start```
+```node app.js```
 
 ## Future Developments
 
