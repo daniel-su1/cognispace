@@ -38,4 +38,4 @@ I plan to further improve StudySpotter by overhauling the frontend with a more r
 
 ## License
 
-StudySpotter is released under the MIT License. See the [LICENSE](https://github.com/your_username_/StudySpotter/blob/main/LICENSE) file for further details.
+StudySpotter is released under the MIT License.
