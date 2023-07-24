@@ -22,7 +22,7 @@ StudySpotter is a comprehensive, full-stack web application designed to help Uni
 To set up the project locally, follow the steps below:
 
 1. Clone the repository:
-```git clone [https://github.com/your_username_/StudySpotter.git](https://github.com/daniel-su1/study-spotter.git)https://github.com/daniel-su1/study-spotter.git```
+```git clone https://github.com/daniel-su1/study-spotter.git```
 
 2. Install NPM packages:
 ```npm install```
